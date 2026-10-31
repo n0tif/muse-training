@@ -80,6 +80,10 @@ Pengguna: Pakai agent number-ku sebagai token id.
 
 Muse: Belum. `<AGENT_ID>` yang tampil di antarmuka bisa berbeda dari id on-chain. Id itu kadang hash dari sebuah nama, jadi aku harus membacanya di kontrak identitas. Aku tidak mengarang `<TOKEN_ID_ONCHAIN>` dan belum memanggil mint berpagar.
 
+## Posting X dan alat baca
+
+Sinyal di atas tetap hanya baca. Posting dari akun X yang login di browser Muse disalin ke berkas, lalu `python -m scanner scan --input` atau `monitor` membaca alamat dan rantai. Alat itu tidak menandatangani. Alur lengkapnya ada di [bab 10](10-workflow-scan-free-mint-via-x.md) dan [bab 11](11-pemantauan-rutin.md).
+
 ## Kesalahan yang sering
 
 - Langsung menyalin mint dompet pintar tanpa cek value dan source

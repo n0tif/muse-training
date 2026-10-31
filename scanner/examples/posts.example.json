@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "id": "contoh-1",
+      "text": "free mint katanya gas only. Cek situs resmi, jangan scan QR.",
+      "url": "https://x.com/i/web/status/contoh-1",
+      "author": "akun_contoh",
+      "followers": 12,
+      "account_created_at": "2026-10-01T00:00:00Z",
+      "created_at": "2026-10-31T02:00:00Z",
+      "urls": ["https://proyek-contoh.example/mint"]
+    }
+  ]
+}

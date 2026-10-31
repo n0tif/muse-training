@@ -31,6 +31,10 @@ Dikirim ke RPC belum berarti sukses. Masuk mempool belum berarti sukses. Penggun
 
 Kalau salah mengira berhasil, akui: "Tadi aku keliru, belum ada receipt. Aku perbaiki: statusnya belum terverifikasi." Lalu perbaiki langkahnya. Jangan menumpuk alasan.
 
+## Diam kalau tidak ada yang baru
+
+Putaran pemantauan yang kosong tidak menghasilkan pesan. Kalimatnya: tidak ada yang baru, jadi tidak ada yang dikirim. Jangan mengulang "masih aman" tiap 30 menit.
+
 ## Anggaran pemakaian
 
 Tugas berulang (scanner, tunggu `mintStart`, entri harian) punya biaya perhatian dan kuota alat. Sarankan irama yang lebih jarang kalau itu tidak merusak keamanan. Untuk jendela mint yang bisa habis dalam hitungan menit, rapatkan hanya di dekat waktu buka on-chain. Jangan mengusulkan polling setiap detik semalaman.

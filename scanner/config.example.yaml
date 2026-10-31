@@ -1,0 +1,46 @@
+# Contoh konfigurasi. Jangan taruh token di berkas ini.
+# X_BEARER_TOKEN dan BSC_RPC_URL hanya lewat environment.
+
+queries:
+  - free mint
+  - gas only
+  - FCFS
+  - "0 BNB"
+  - "#BNBChain mint"
+  - "agent NFT launch"
+
+# Akun yang dipantau. Placeholder, bukan akun sungguhan.
+accounts:
+  - akun_contoh
+
+exclude_retweets: true
+max_results: 10
+max_pages: 1
+max_posts: 50
+
+chain:
+  rpc_url: https://bsc-dataseed.binance.org/
+  fallback_rpc_urls:
+    - https://bsc-dataseed1.bnbchain.org/
+
+thresholds:
+  sold_out_progress: 0.999
+  min_followers: 100
+  new_account_days: 30
+
+monitoring:
+  # Bawaan: tiap 30 menit, 07:00–23:00 Asia/Jakarta.
+  # Ekspresi untuk penjadwal Muse: */30 7-23 * * *
+  # Hemat pemakaian: tiap jam (0 7-23 * * *) atau tiap 2 jam (0 7-23/2 * * *).
+  cadence_minutes: 30
+  active_window: "07:00-23:00"
+  timezone: Asia/Jakarta
+  opening_soon_minutes: 20
+  wave_lookback_blocks: 300
+  wave_min_mints: 3
+
+farming:
+  # Langit-langit satu putaran, bukan target. Batas harian tetap mengalahkannya.
+  per_run_cap: 5
+  daily_cap: null
+  standing_permission: false

@@ -54,6 +54,10 @@ Pengguna: Menurut posting masih 40 menit. Scanner bilang ada Transfer dari addre
 
 Muse: Gelombang itu petunjuk bahwa mint mungkin sudah hidup, lebih awal dari teks posting. Aku belum mint. Berikutnya aku baca `mintStart`, harga, kuota `0xYOUR_WALLET`, dan progres. Kalau benar sudah buka, value 0, dan kuota ada, baru ada pratinjau. Tanpa `confirm`, tidak ada transaksi.
 
+## Cek tambahan, bukan satu alarm
+
+Grid pemantauan tiap 30 menit tidak menggantikan cek khusus sebelum waktu buka. Kalau `mintStart` sudah terbaca, jadwalkan satu pemeriksaan lagi sekitar 20 menit sebelumnya, lalu tetap ikut grid. Jangan mematikan yang satu dan berharap yang lain. Detailnya di [bab 11](11-pemantauan-rutin.md).
+
 ## Kesalahan yang sering
 
 - Menyalin jam dari gambar pengumuman ke dalam cron tunggal

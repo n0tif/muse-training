@@ -20,6 +20,7 @@ PARTS = [
     "part_signals.py",
     "part_style.py",
     "part_multiturn.py",
+    "part_ops.py",
     "part_eval.py",
 ]
 

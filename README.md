@@ -20,8 +20,15 @@ English, in short: a public training kit (system prompt, retrieval guides, and c
 | [scripts/convert_formats.py](scripts/convert_formats.py) | Chat JSONL ke Alpaca JSONL. |
 | [scripts/check_no_secrets.py](scripts/check_no_secrets.py) | Menolak alamat 40-hex mentah, string 64-hex, dan penugasan rahasia. |
 | [scripts/build_dataset.py](scripts/build_dataset.py) | Membangun ulang chat JSONL dari `scripts/dataset/`. |
+| [CHECKLIST.md](CHECKLIST.md) | Ringkasan satu halaman semua aturan. |
+| [guide/10-workflow-scan-free-mint-via-x.md](guide/10-workflow-scan-free-mint-via-x.md) | Alur scan free-mint dari browser. |
+| [guide/11-pemantauan-rutin.md](guide/11-pemantauan-rutin.md) | Pemantauan tiap 30 menit. |
+| [playbooks/scan_free_mint.md](playbooks/scan_free_mint.md) | Daftar cek satu putaran scan. |
+| [playbooks/monitoring_routine.md](playbooks/monitoring_routine.md) | Daftar cek pemantauan. |
+| [prompts/routine_monitor.md](prompts/routine_monitor.md) | Prompt siap tempel untuk penjadwal. |
+| [scanner/](scanner/) | Pemindai baca-saja: `scan` dan `monitor`. |
 
-Set yang terkomit saat ini: **176** contoh latih (13 di antaranya multi-turn) dan **32** contoh uji.
+Set yang terkomit saat ini: **208** contoh latih (25 multi-turn) dan **39** contoh uji (2 multi-turn).
 
 ## Cara memakai
 
@@ -45,13 +52,15 @@ Baris multi-turn mengulang `user` dan `assistant` setelah system, dan tetap bera
 
 ## Validasi
 
-Python 3.11 atau lebih baru, hanya pustaka standar:
+Skrip data memakai pustaka standar. Pemindai butuh PyYAML; tesnya butuh pytest.
 
 ```bash
+python -m pip install -r scanner/requirements.txt
 python scripts/build_dataset.py
 python scripts/convert_formats.py
 python scripts/validate_jsonl.py
 python scripts/check_no_secrets.py
+python -m pytest scanner/tests -q
 ```
 
 `build_dataset.py --check` dan `convert_formats.py --check` gagal kalau JSONL yang terkomit tidak sama dengan hasil generator. GitHub Actions menjalankan keempat pemeriksaan pada push dan pull request (`.github/workflows/validate.yml`).
@@ -73,6 +82,14 @@ Mint berjadwal percaya jam di kontrak. Jam di postingan bisa lebih lambat sejam,
 Posting raffle berbeda tiap hari, memuat tagar dan nomor agen yang diminta, dan tidak menjanjikan menang. Klaim memakai kontrak terverifikasi dan value 0. Kode promo hanya ditebus kalau pengguna sendiri yang mengetiknya.
 
 Jawaban singkat, bahasa Indonesia, kesimpulan di depan, memisahkan yang sudah dan yang belum, dan tidak mengaku transaksi berhasil sebelum ada receipt success.
+
+## Pemindai dan pemantauan
+
+`scanner` hanya membaca. `scan` menulis `out/leads.json` dan `out/leads.md`. `monitor` menulis `out/changes.md` dan diam kalau tidak ada selisih. Posting dari browser masuk lewat `--input`. Token API, kalau dipakai, hanya dari `X_BEARER_TOKEN`.
+
+Irama bawaan yang diajarkan ke Muse: tiap 30 menit, 07:00–23:00 WIB (`*/30 7-23 * * *`). Alternatif hemat: tiap jam atau tiap 2 jam. Batas per putaran pada konfigurasi contoh adalah 5 mint gratis, dan batas harian tetap mengalahkannya. Workflow GitHub `scan.yml` tidak jalan sendiri; cron-nya dikomentari.
+
+Akun untuk membaca X disebut akun X yang login di browser Muse. Tidak ada connect wallet dan tidak ada QR.
 
 ## Lisensi
 

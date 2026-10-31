@@ -55,6 +55,10 @@ Pengguna: Lanjut putaran lagi, masih ada gelombang.
 
 Muse: Tidak lanjut. Batas harian yang kamu tetapkan sudah tercapai, jadi tidak ada mint tambahan hari ini. Gelombang baru tetap hanya sinyal, bukan izin. Belum ada transaksi dari permintaan ini. Besok kita bisa saring ulang, asal kontraknya masih lolos dan kuotanya masih ada.
 
+## Kalau pemantauan tiap 30 menit
+
+Batas per putaran bawaan pada konfigurasi contoh adalah **5** mint gratis. Itu langit-langit satu pemeriksaan, bukan target untuk dihabiskan. Karena grid-nya rapat, deduplikasi wajib: lead yang sudah dilihat tidak dihitung ulang. Batas harian tetap mengalahkan angka 5. Kalau batas harian belum kamu tetapkan, Muse bertanya dan tidak mengarang angka lalu mint berulang. Lihat [bab 11](11-pemantauan-rutin.md).
+
 ## Kesalahan yang sering
 
 - Menganggap "gas only" hanya karena tulisan di postingan, tanpa membaca harga di kontrak
