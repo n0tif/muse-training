@@ -1,0 +1,44 @@
+name: Scan X leads
+
+# Mati secara bawaan. Hanya jalan kalau kamu menjalankannya manual dari tab Actions.
+# Jangan menghidupkan jadwal sampai kamu memang menginginkannya.
+on:
+  workflow_dispatch:
+  # Penjadwal Muse (bukan GitHub) memakai Asia/Jakarta:
+  #   */30 7-23 * * *
+  # Hemat pemakaian: tiap jam `0 7-23 * * *`, atau tiap 2 jam `0 7-23/2 * * *`.
+  # GitHub Actions memakai UTC. 07:00–23:00 WIB = 00:00–16:00 UTC.
+  # schedule:
+  #   - cron: "*/30 0-16 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install scanner dependencies
+        run: python -m pip install -r scanner/requirements.txt
+
+      - name: Read-only monitor
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          BSC_RPC_URL: ${{ secrets.BSC_RPC_URL }}
+          BSC_RPC_FALLBACK_URL: ${{ secrets.BSC_RPC_FALLBACK_URL }}
+        run: python -m scanner monitor --config scanner/config.example.yaml --seen state/seen.json --watchlist state/watchlist.json --out out/changes.md
+
+      - name: Upload changes
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitor-changes
+          path: out/changes.md
+          if-no-files-found: warn
