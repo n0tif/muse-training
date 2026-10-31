@@ -1,0 +1,32 @@
+name: Validate training kit
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate JSONL
+        run: python scripts/validate_jsonl.py
+
+      - name: Check for raw addresses and secrets
+        run: python scripts/check_no_secrets.py
+
+      - name: Rebuild dataset and confirm it matches
+        run: python scripts/build_dataset.py --check
+
+      - name: Check Alpaca conversion is fresh
+        run: python scripts/convert_formats.py --check
